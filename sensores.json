@@ -1,0 +1,78 @@
+[
+    {
+        "id": "1",
+        "Tipo": "US",
+        "Pines": [
+            14,
+            15
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "2",
+        "Tipo": "TH",
+        "Pines": [
+            21
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "3",
+        "Tipo": "HUMO",
+        "Pines": [
+            30
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "4",
+        "Tipo": "TH",
+        "Pines": [
+            6
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "6",
+        "Tipo": "US",
+        "Pines": [
+            14,
+            15
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "6",
+        "Tipo": "TH",
+        "Pines": [
+            20
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "1",
+        "Tipo": "US",
+        "Pines": [
+            14,
+            15
+        ],
+        "Clave": ""
+    },
+    {
+        "id": "1",
+        "Tipo": "US",
+        "Pines": [
+            14,
+            15
+        ],
+        "Clave": "Ultrasonico exterior"
+    },
+    {
+        "id": "2",
+        "Tipo": "TH",
+        "Pines": [
+            21
+        ],
+        "Clave": "Temperatura y humedad interior"
+    }
+]

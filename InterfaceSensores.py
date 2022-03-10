@@ -8,14 +8,15 @@ class InterfaceSensor():
         self.mongo=MongoDB()
     def interfaceSensor(self):
         self.opc=''
-        while(self.opc!='7'):
+        while(self.opc!='8'):
             print("1)Agregar sensor")
             print("2)Ver sensores")
             print("3)Buscar sensor")
             print("4)Modificar sensores")
             print("5)Eliminar sensor")
             print("6)Medir")
-            print("7)Salir")
+            print("7)Sensores")
+            print("8)Salir")
             self.opc=input("Elige una opciion:\n")
             if(self.opc=="1"):
                 nsensor=self.agregarSensor()
@@ -41,6 +42,15 @@ class InterfaceSensor():
                 id=input("Escribe el id del sensor:")
                 res=self.Sensorlista.buscarSensor(id)
                 self.Sensorlista.medicion(res)
+            elif(self.opc=='7'):
+                res=self.mongo.getSensores()
+                for sensor in res:
+                    print('------------------------------------')
+                    print("Id del sensor:"+str(sensor['id']))
+                    print("Tipo:"+str(sensor['Tipo']))
+                    print("Clave:"+str(sensor['Clave']))
+                    print("Pines:"+str(sensor['Pines']))
+                    print('------------------------------------')
     def agregarSensor(self):
         sen=Sensores()
         sen.id=input("Escriba el id del sensor:")

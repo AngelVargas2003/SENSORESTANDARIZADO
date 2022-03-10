@@ -1,6 +1,8 @@
 import json
 import os.path
 import RPi.GPIO as GPIO
+import Adafruit_DHT
+import time
 import time
 class Sensores:
     lista=[]
@@ -27,6 +29,8 @@ class Sensores:
     def medicion(self,sensor):
         if(sensor.tipo=='US'):
             self.sensorULTRASONICO(sensor)
+        elif(sensor.tipo=='TH'):
+            self.sensorDHT11(sensor)
     
     def getDiccionario(self):
         return{
@@ -118,5 +122,15 @@ class Sensores:
         print('Distance: {} centimetros'.format(distance))
         GPIO.cleanup()
         return distance
+    def sensorDHT11(self,sensores):
+        print('Inicia')
+        sensor = Adafruit_DHT.DHT11 #Cambia por DHT22 y si usas dicho sensor
+        pin = sensores.pin[0] #Pin en la raspberry donde conectamos el sensor
+        print('Leyendo')
+        humedad, temperatura = Adafruit_DHT.read_retry(sensor, pin)
+        print ('Humedad: ' , humedad)
+        print ('Temperatura: ' , temperatura)
+
+        time.sleep(0.25) #Cada segundo se evalúa el sensor
         
     

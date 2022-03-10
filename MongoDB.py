@@ -10,3 +10,8 @@ class MongoDB():
     def insertar(self,listadicc):
         self.set_database()
         self.collection.insert_one(listadicc)
+    def getSensores(self):
+        self.set_database()
+        result=self.collection.find()
+        return result
+    

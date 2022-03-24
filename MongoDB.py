@@ -8,8 +8,12 @@ class MongoDB():
         self.db=client['Sensores']
         self.collection=self.db['SensoresRegister']
     def insertar(self,listadicc):
-        self.set_database()
-        self.collection.insert_one(listadicc)
+        try:
+            self.set_database()
+            self.collection.insert_one(listadicc)
+        except:
+            print("No hay internet")
+
     def getSensores(self):
         self.set_database()
         result=self.collection.find()

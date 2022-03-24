@@ -2,10 +2,11 @@ from cmath import pi
 from Sensoresv3 import Sensores
 from MongoDB import MongoDB
 class InterfaceSensor():
-    def __init__(self) -> None:
+    def __init__(self):
         self.Sensorlista=Sensores()
         self.Sensorlista.toObjects()
         self.mongo=MongoDB()
+        #self.Sensorlista.append(Sensores(condifuracion))
     def interfaceSensor(self):
         self.opc=''
         while(self.opc!='8'):
@@ -15,42 +16,33 @@ class InterfaceSensor():
             print("4)Modificar sensores")
             print("5)Eliminar sensor")
             print("6)Medir")
-            print("7)Sensores")
+            print("7)Ver sensores de la BD")
             print("8)Salir")
             self.opc=input("Elige una opciion:\n")
             if(self.opc=="1"):
                 nsensor=self.agregarSensor()
                 self.Sensorlista.add(nsensor)
-                listadicc=self.Sensorlista.addDicc()
-                self.Sensorlista.toJson(listadicc)
+                self.Sensorlista.toJson(self.Sensorlista)
                 dicc=self.Sensorlista.listaDiccionarios()
                 self.mongo.insertar(dicc)
             elif(self.opc=='2'):
-                self.Sensorlista.getSensor()
+                self.verSensor()
             elif(self.opc=='3'):
                 res=self.buscarSensor()
-                print(type(res))
                 print(res)
             elif(self.opc=='4'):
-                self.Sensorlista.getSensor()
+                self.verSensor()
                 self.modificarSensor()
             elif(self.opc=='5'):
-                self.Sensorlista.getSensor()
+                self.verSensor()
                 self.eliminarSensor()
             elif(self.opc=='6'):
-                self.Sensorlista.getSensor()
+                self.verSensor()
                 id=input("Escribe el id del sensor:")
                 res=self.Sensorlista.buscarSensor(id)
                 self.Sensorlista.medicion(res)
             elif(self.opc=='7'):
-                res=self.mongo.getSensores()
-                for sensor in res:
-                    print('------------------------------------')
-                    print("Id del sensor:"+str(sensor['id']))
-                    print("Tipo:"+str(sensor['Tipo']))
-                    print("Clave:"+str(sensor['Clave']))
-                    print("Pines:"+str(sensor['Pines']))
-                    print('------------------------------------')
+                self.verSensores()
     def agregarSensor(self):
         sen=Sensores()
         sen.id=input("Escriba el id del sensor:")
@@ -84,6 +76,7 @@ class InterfaceSensor():
             pinesnvo=self.addpines()
             sen.pin=pinesnvo
             sen.tipo=input("Escriba el tipo del sensor:")
+            sen.clave=input("Escriba la clave del sensor")
             self.Sensorlista.modificarSensor(id,sen)
         else:
             print("El sensor no existe")
@@ -94,5 +87,22 @@ class InterfaceSensor():
             self.Sensorlista.eliminarSensor(id)
         else:
             print('No se pudo eliminar')
+    def verSensor(self,lista=None):
+        print("\n\n"+"*"*30+"Datos de Sensores"+"*"*30)
+        if(lista==None):
+            mylista=self.Sensorlista
+        i=0
+        for p in mylista:
+            print(str(p))
+            i+=1
+    def verSensores(self):
+        res=self.mongo.getSensores()
+        for sensor in res:
+            print('------------------------------------')
+            print("Id del sensor:"+str(sensor['id']))
+            print("Tipo:"+str(sensor['Tipo']))
+            print("Clave:"+str(sensor['Clave']))
+            print("Pines:"+str(sensor['Pines']))
+            print('------------------------------------')
 menu=InterfaceSensor()
 menu.interfaceSensor()

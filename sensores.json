@@ -1,78 +1,48 @@
-[
+[ 
     {
         "id": "1",
-        "Tipo": "US",
-        "Pines": [
+        "pin": [
             14,
             15
         ],
-        "Clave": ""
-    },
-    {
-        "id": "2",
-        "Tipo": "TH",
-        "Pines": [
-            21
-        ],
-        "Clave": ""
+        "tipo": "US",
+        "clave": "Ultrasonico Interior",
+        "__idx__": 0
     },
     {
         "id": "3",
-        "Tipo": "HUMO",
-        "Pines": [
-            30
+        "pin": [
+            21
         ],
-        "Clave": ""
-    },
-    {
-        "id": "4",
-        "Tipo": "TH",
-        "Pines": [
-            6
-        ],
-        "Clave": ""
-    },
-    {
-        "id": "6",
-        "Tipo": "US",
-        "Pines": [
-            14,
-            15
-        ],
-        "Clave": ""
-    },
-    {
-        "id": "6",
-        "Tipo": "TH",
-        "Pines": [
-            20
-        ],
-        "Clave": ""
-    },
-    {
-        "id": "1",
-        "Tipo": "US",
-        "Pines": [
-            14,
-            15
-        ],
-        "Clave": ""
-    },
-    {
-        "id": "1",
-        "Tipo": "US",
-        "Pines": [
-            14,
-            15
-        ],
-        "Clave": "Ultrasonico exterior"
+        "tipo": "PIR",
+        "clave": "PIR Interior",
+        "__idx__": 0
     },
     {
         "id": "2",
-        "Tipo": "TH",
-        "Pines": [
-            21
+        "pin": [
+            12
         ],
-        "Clave": "Temperatura y humedad interior"
+        "tipo": "TH",
+        "clave": "Temperatura interior",
+        "__idx__": 0
+    },
+    {
+        "id": "4",
+        "pin": [
+            18
+        ],
+        "tipo": "TH",
+        "clave": "Temperatura exterior",
+        "__idx__": 0
+    },
+    {
+        "id": "5",
+        "pin": [
+            26
+        ],
+        "tipo": "PIR",
+        "clave": "PIR Exterior",
+        "__idx__": 0
     }
 ]

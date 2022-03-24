@@ -1,9 +1,9 @@
-from operator import contains
-import Adafruit_DHT
-from cmath import pi
-import imp
-import time
-from tkinter import Menu
+#from operator import contains
+#import Adafruit_DHT
+#from cmath import pi
+#import imp
+#import time
+#from tkinter import Menu
 class main():
     def sensorDHT11(self):
         import Adafruit_DHT
@@ -16,7 +16,7 @@ class main():
         print ('Humedad: ' , humedad)
         print ('Temperatura: ' , temperatura)
 
-        time.sleep(0.25) #Cada segundo se evalúa el sensor
+        time.sleep(0.25) #Cada segundo se evalúa el sensor  
 
     def sensorULTRASONICO(self):
         import RPi.GPIO as GPIO

@@ -1,17 +1,21 @@
 import json
 import os.path
-import RPi.GPIO as GPIO
-import Adafruit_DHT
-import time
-import time
+#import RPi.GPIO as GPIO
+#import Adafruit_DHT
+#import time
+#import time
 class Sensores:
-    lista=[]
-    def __init__(self,id='',pin='',tipo='',lista=list(),clave=''):
+    def __init__(self,id='',pin='',tipo='',clave=''):
         self.id=id
         self.pin=pin
         self.tipo=tipo
-        self.lista=lista
         self.clave=clave
+        self.__idx__=0
+
+    #def initSensor(self):
+      #  if(self.tipo=='US'):
+            
+
 
     def add(self,sensor):
         self.lista.append(sensor)
@@ -41,14 +45,14 @@ class Sensores:
         }
     def toJson(self,listaSensores):		
         file = open("sensores.json", "w")
-        file = json.dump([ob for ob in listaSensores], file,indent=4)
+        file = json.dump([ob.__dict__ for ob in listaSensores], file,indent=4)
     
     def toObjects(self):
         lista=list()
         data=self.getDataJson()
         for x in data:
-            lista.append(Sensores(id=x['id'],tipo=x['Tipo'],pin=x["Pines"],clave=x["Clave"]))
-    
+            lista.append(Sensores(id=x['id'],tipo=x['tipo'],pin=x["pin"],clave=x["clave"]))
+        self.lista=lista
     def getDataJson(self):		
         data=[]
         if(os.path.isfile('sensores.json')):
@@ -102,6 +106,16 @@ class Sensores:
         for index,sensor in enumerate(self.lista):
             if(sensor.id==id):
                 return self.lista[index]
+    def __next__(self):
+        if self.__idx__<len(self.lista):
+            x =self.lista[self.__idx__]
+            self.__idx__+=1 
+            return x
+        else:
+            raise StopIteration 
+    def __iter__(self):
+        self.__idx__ = 0
+        return self
     
     def sensorULTRASONICO(self,sensor):
         GPIO.setmode(GPIO.BCM)
@@ -110,9 +124,9 @@ class Sensores:
         GPIO.output(sensor.pin[0], True)
         time.sleep(1)
         GPIO.output(sensor.pin[0], False)
-        while GPIO.input(sensor.pin[1]) == False:
+        while GPIO.input(self.pin[1]) == False:
             start = time.time()
-        while GPIO.input(sensor.pin[1]) == True:
+        while GPIO.input(self.pin[1]) == True:
             end = time.time()
         sig_time = end-start
          #Centimetros:
@@ -122,6 +136,7 @@ class Sensores:
         print('Distance: {} centimetros'.format(distance))
         GPIO.cleanup()
         return distance
+
     def sensorDHT11(self,sensores):
         print('Inicia')
         sensor = Adafruit_DHT.DHT11 #Cambia por DHT22 y si usas dicho sensor
